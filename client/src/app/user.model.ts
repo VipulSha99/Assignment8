@@ -11,7 +11,20 @@ export interface UserModel{
     createdAt: string,
 }
 
+export interface patchUserModel{
+    first_name: string,
+    middle_name: string,
+    last_name: string,
+    email: string,
+    phone_number: number,
+    address: string,
+}
+
 export interface customer{
+    id: string,
+    name: string
+}
+export interface role{
     id: string,
     name: string
 }

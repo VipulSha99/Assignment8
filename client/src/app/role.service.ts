@@ -1,16 +1,17 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import {environment} from '../environments/environment';
-import { customer } from './user.model';
+import { role } from './user.model';
 
 @Injectable({
   providedIn: 'root'
 })
-export class CustomerService {
+export class RoleService {
 
   constructor(private http: HttpClient) { }
-
-  getCustomer(){
-    return this.http.get<customer[]>(environment.apiURL+'/customers');
+    
+  getRole(){
+    return this.http.get<role[]>(environment.apiURL+'/roles');
   }
+  
 }

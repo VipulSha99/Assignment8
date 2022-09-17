@@ -36,7 +36,7 @@ export class TabularComponent implements OnInit {
   
   onSave(event:any,data:UserModel){
     this.saveEnable = false;
-    let editData: {[key: string]: string}={};
+    let editData: {[key: string]: string|number}={};
     event.path[0].value = "Edit";
     event.path[1].childNodes[1].value = "Delete";
     let j:number=0;
@@ -45,7 +45,7 @@ export class TabularComponent implements OnInit {
       editData[event.path[2].cells[j].childNodes[0].name]=event.path[2].cells[j].childNodes[0].value;
       this.prevArray[j]=event.path[2].cells[j].childNodes[0].value;
     }
-    editData[event.path[2].cells[j].childNodes[0].name]=data.createdAt;
+    editData["phone_number"]=+editData["phone_number"];
     this.userService.editUser(data.id as string,editData).subscribe(_=>{
       this.userService.getUsers().subscribe(newData=>{
         this.userData = newData;

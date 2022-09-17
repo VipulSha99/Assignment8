@@ -1,8 +1,9 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { CustomerService } from 'src/app/customer.service';
+import { RoleService } from 'src/app/role.service';
 import { UserService } from 'src/app/user.service';
-import {customer, Role} from '../../user.model';
+import {customer, role, Role} from '../../user.model';
 
 @Component({
   selector: 'app-user-add',
@@ -16,20 +17,20 @@ export class UserAddComponent implements OnInit {
   role = Role;
   customers: customer[];
 
-  constructor(private userService: UserService,private customerService: CustomerService) { }
+  constructor(private userService: UserService,private customerService: CustomerService, private roleService: RoleService) { }
 
   ngOnInit(): void {
     this.customerService.getCustomer().subscribe(newData=>{
       this.customers = newData;
     });
     this.addUserForm = new FormGroup({
-      'firstName': new FormControl(null,[Validators.required]),
-      'middleName':new FormControl(''),
-      'lastName':new FormControl(null,[Validators.required]),
+      'first_name': new FormControl(null,[Validators.required]),
+      'middle_name':new FormControl(''),
+      'last_name':new FormControl(null,[Validators.required]),
       'email':new FormControl(null,[Validators.required,Validators.email]),
-      'phoneNumber':new FormControl(null,[Validators.required]),
-      'rid':new FormControl(null,[Validators.required,this.forbiddenNames.bind(this)]),
-      'cid':new FormControl(null,[Validators.required]),
+      'phone_number':new FormControl(null,[Validators.required]),
+      'customerId':new FormControl(null,[Validators.required]),
+      'roleId':new FormControl(null,[Validators.required,this.forbiddenNames.bind(this)]),
       'address':new FormControl(null,[Validators.required])
     })
   }
@@ -41,9 +42,20 @@ export class UserAddComponent implements OnInit {
     }
     else{
       this.addButtonClicked = false;
-      this.userService.addUser(this.addUserForm.value).subscribe(responseData=>{
-        this.addUserForm.reset();
-        this.updatedData.emit();
+      let role:role;
+      this.roleService.getRole().subscribe(response=>{
+        response.map(data=>{
+          if(data.name==this.addUserForm.value.roleId){
+            role=data;
+          }
+        })
+        let userFormData = this.addUserForm.value;
+        userFormData['roleId']=role.id;
+        console.log(userFormData);
+        this.userService.addUser(userFormData).subscribe(responseData=>{
+          this.addUserForm.reset();
+          this.updatedData.emit();
+        })
       })
     }
   }
