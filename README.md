@@ -1,6 +1,6 @@
 # Assignment 8
 
-## ✨Tabular Representation in Type Script with LoopBack Server✨
+## ✨Tabular Representation in Angular with LoopBack Server✨
 
 # Run code for both client and server separately -
 
