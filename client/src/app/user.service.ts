@@ -12,7 +12,7 @@ export class UserService {
   constructor(private http: HttpClient) { }
 
   getUsers(){
-    return this.http.get<{[key: string]:UserModel}>(environment.apiURL+'/user').pipe(
+    return this.http.get<{[key: string]:UserModel}>(environment.apiURL+'/users').pipe(
       map((responseData)=>{
         const userArray:UserModel[] = [];
         for (const key in responseData){
@@ -26,15 +26,15 @@ export class UserService {
   }
 
   deleteUser(id:string){
-    return this.http.delete(`${environment.apiURL}/user/${id}`);
+    return this.http.delete(`${environment.apiURL}/users/${id}`);
   }
 
   addUser(userData:UserModel){
-    return this.http.post(environment.apiURL+'/user',userData);
+    return this.http.post(environment.apiURL+'/users',userData);
   }
 
-  editUser(id:string,userData:{[key: string]: string}){
+  editUser(id:string,userData:{[key: string]: string|number}){
     console.log(userData);
-    return this.http.put(`${environment.apiURL}/user/${id}`,userData);
+    return this.http.patch(`${environment.apiURL}/users/${id}`,userData);
   }
 }
