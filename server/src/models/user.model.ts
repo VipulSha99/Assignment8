@@ -1,8 +1,8 @@
 import {Entity, model, property, belongsTo} from '@loopback/repository';
-import {Customer} from './customer.model';
-import {Role} from './role.model';
+import {Customer, CustomerWithRelations} from './customer.model';
+import {Role, RoleWithRelations} from './role.model';
 
-@model({settings: {strict: true}})
+@model({name:'user',settings: {strict: true}})
 export class User extends Entity {
   @property({
     type: 'string',
@@ -15,19 +15,19 @@ export class User extends Entity {
     type: 'string',
     required: true,
   })
-  first_name: string;
+  firstName: string;
 
   @property({
     type: 'string',
     default: '',
   })
-  middle_name?: string;
+  middleName?: string;
 
   @property({
     type: 'string',
     required: true,
   })
-  last_name: string;
+  lastName: string;
 
   @property({
     type: 'string',
@@ -42,7 +42,7 @@ export class User extends Entity {
       dataType: 'bigint',
     },
   })
-  phone_number: number;
+  phoneNumber: number;
 
   @property({
     type: 'string',
@@ -67,11 +67,6 @@ export class User extends Entity {
 
   @belongsTo(() => Role)
   roleId: string;
-  // Define well-known properties here
-
-  // Indexer property to allow additional data
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  [prop: string]: any;
 
   constructor(data?: Partial<User>) {
     super(data);
@@ -80,6 +75,8 @@ export class User extends Entity {
 
 export interface UserRelations {
   // describe navigational properties here
+  role? : RoleWithRelations;
+  customer? : CustomerWithRelations;
 }
 
 export type UserWithRelations = User & UserRelations;

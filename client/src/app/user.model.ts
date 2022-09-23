@@ -1,10 +1,10 @@
 export interface UserModel{
     id?: string,
-    first_name: string,
-    middle_name: string,
-    last_name: string,
+    firstName: string,
+    middleName: string,
+    lastName: string,
     email: string,
-    phone_number: number,
+    phoneNumber: number,
     role: {name:string},
     customer:{name:string},
     address: string,
@@ -12,11 +12,11 @@ export interface UserModel{
 }
 
 export interface patchUserModel{
-    first_name: string,
-    middle_name: string,
-    last_name: string,
+    firstName: string,
+    middleName: string,
+    lastName: string,
     email: string,
-    phone_number: number,
+    phoneNumber: number,
     address: string,
 }
 

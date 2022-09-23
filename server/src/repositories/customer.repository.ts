@@ -18,8 +18,5 @@ export class CustomerRepository extends DefaultCrudRepository<
     super(Customer, dataSource);
     this.users = this.createHasManyRepositoryFactoryFor('users', userRepositoryGetter,);
     this.registerInclusionResolver('users', this.users.inclusionResolver);
-    (this.modelClass as any).observe('persist', async (ctx: any) => {
-      ctx.data.updatedAt = new Date();
-    });
   }
 }

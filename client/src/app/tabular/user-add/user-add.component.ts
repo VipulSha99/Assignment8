@@ -24,11 +24,11 @@ export class UserAddComponent implements OnInit {
       this.customers = newData;
     });
     this.addUserForm = new FormGroup({
-      'first_name': new FormControl(null,[Validators.required]),
-      'middle_name':new FormControl(''),
-      'last_name':new FormControl(null,[Validators.required]),
+      'firstName': new FormControl(null,[Validators.required]),
+      'middleName':new FormControl(''),
+      'lastName':new FormControl(null,[Validators.required]),
       'email':new FormControl(null,[Validators.required,Validators.email]),
-      'phone_number':new FormControl(null,[Validators.required]),
+      'phoneNumber':new FormControl(null,[Validators.required]),
       'customerId':new FormControl(null,[Validators.required]),
       'roleId':new FormControl(null,[Validators.required,this.forbiddenNames.bind(this)]),
       'address':new FormControl(null,[Validators.required])

@@ -25,8 +25,5 @@ export class UserRepository extends DefaultCrudRepository<
     this.registerInclusionResolver('role', this.role.inclusionResolver);
     this.customer = this.createBelongsToAccessorFor('customer', customerRepositoryGetter,);
     this.registerInclusionResolver('customer', this.customer.inclusionResolver);
-    (this.modelClass as any).observe('persist', async (ctx: any) => {
-      ctx.data.updatedAt = new Date();
-    });
   }
 }

@@ -1,7 +1,7 @@
 import {Entity, model, property, hasMany} from '@loopback/repository';
-import {User} from './user.model';
+import {User, UserWithRelations} from './user.model';
 
-@model({settings: {strict: true}})
+@model({name:'customer',settings: {strict: true}})
 export class Customer extends Entity {
   @property({
     type: 'string',
@@ -43,12 +43,6 @@ export class Customer extends Entity {
   @hasMany(() => User)
   users: User[];
 
-  // Define well-known properties here
-
-  // Indexer property to allow additional data
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  [prop: string]: any;
-
   constructor(data?: Partial<Customer>) {
     super(data);
   }
@@ -56,6 +50,7 @@ export class Customer extends Entity {
 
 export interface CustomerRelations {
   // describe navigational properties here
+  user?: UserWithRelations[];
 }
 
 export type CustomerWithRelations = Customer & CustomerRelations;

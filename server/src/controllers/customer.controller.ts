@@ -126,6 +126,7 @@ export class CustomerController {
     })
     customer: Customer,
   ): Promise<void> {
+    customer.updatedAt=new Date();
     await this.customerRepository.updateById(id, customer);
   }
 

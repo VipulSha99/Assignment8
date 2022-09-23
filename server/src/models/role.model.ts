@@ -1,5 +1,5 @@
 import {Entity, model, property, hasMany} from '@loopback/repository';
-import {User} from './user.model';
+import {User, UserWithRelations} from './user.model';
 
 enum QueryLanguage {
   'A',
@@ -7,7 +7,7 @@ enum QueryLanguage {
   'S',
 }
 
-@model({settings: {strict: true}})
+@model({name: 'role',settings: {strict: true}})
 export class Role extends Entity {
   @property({
     type: 'string',
@@ -50,11 +50,6 @@ export class Role extends Entity {
 
   @hasMany(() => User)
   users: User[];
-  // Define well-known properties here
-
-  // Indexer property to allow additional data
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  [prop: string]: any;
 
   constructor(data?: Partial<Role>) {
     super(data);
@@ -63,6 +58,7 @@ export class Role extends Entity {
 
 export interface RoleRelations {
   // describe navigational properties here
+  user?: UserWithRelations[];
 }
 
 export type RoleWithRelations = Role & RoleRelations;

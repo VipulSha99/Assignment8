@@ -126,6 +126,7 @@ export class RoleController {
     })
     role: Role,
   ): Promise<void> {
+    role.updatedAt = new Date();
     await this.roleRepository.updateById(id, role);
   }
 

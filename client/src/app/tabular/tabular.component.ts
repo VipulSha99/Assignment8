@@ -45,7 +45,7 @@ export class TabularComponent implements OnInit {
       editData[event.path[2].cells[j].childNodes[0].name]=event.path[2].cells[j].childNodes[0].value;
       this.prevArray[j]=event.path[2].cells[j].childNodes[0].value;
     }
-    editData["phone_number"]=+editData["phone_number"];
+    editData["phoneNumber"]=+editData["phoneNumber"];
     this.userService.editUser(data.id as string,editData).subscribe(_=>{
       this.userService.getUsers().subscribe(newData=>{
         this.userData = newData;

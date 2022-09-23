@@ -126,6 +126,7 @@ export class UserController {
     })
     user: User,
   ): Promise<void> {
+    user.updatedAt = new Date();
     await this.userRepository.updateById(id, user);
   }
 
